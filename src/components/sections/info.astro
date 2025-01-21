@@ -1,0 +1,47 @@
+---
+import { sanity } from "../../lib/sanity";
+import SectionTitle from "../section-title.astro";
+import { contactQuery, infoQuery } from "../../sanity.queries";
+import { Icon } from "astro-icon/components";
+import Section from "../section";
+
+const contacts = (await sanity.fetch(contactQuery))!;
+
+const locale = Astro.currentLocale;
+const info = (await sanity.fetch(infoQuery, { lang: locale }))!;
+
+const sections = (["email", "phone", "address"] as const).map((key) => {
+  return {
+    ...info[key]!,
+    items: contacts.map((c) => c[key]!),
+  };
+});
+---
+
+<Section client:load name="info">
+  <SectionTitle center>
+    <Fragment slot="subtitle">{info.section}</Fragment>
+    {info.title}
+    <Fragment slot="description">
+      {info.description}
+    </Fragment>
+  </SectionTitle>
+  <div class="grid grid-cols-3 gap-16">
+    {
+      sections.map((s) => (
+        <div class="text-center">
+          <Icon name={s.icon} class="size-12 mb-4 mx-auto text-primary" />
+          <h3 class="text-3xl font-bold mb-2">{s.title}</h3>
+          <p class="mb-6">{s.description}</p>
+          <ul class="space-y-1">
+            {s.items.map((i) => (
+              <li>
+                <a class="underline">{i}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</Section>

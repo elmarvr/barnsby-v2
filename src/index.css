@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-background: #fafafa;
+  --color-foreground: #171717;
+
+  --color-primary: #84cc16;
+}
+
+body {
+  @apply font-body text-foreground bg-background;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-display font-bold;
+}

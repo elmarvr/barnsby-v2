@@ -1,0 +1,60 @@
+---
+import { sanity } from "../../lib/sanity";
+import { buyersSellersQuery } from "../../sanity.queries";
+import Section from "../section";
+import SectionTitle from "../section-title.astro";
+import { TabsTrigger, TabsContent } from "../tabs";
+
+const locale = Astro.currentLocale;
+const section = (await sanity.fetch(buyersSellersQuery, { lang: locale }))!;
+
+const tabs = [section.sellers, section.buyers];
+---
+
+<Section
+  client:load
+  name="buyers-sellers"
+  className="grid grid-cols-2 space-x-16"
+>
+  <div>
+    <SectionTitle>
+      <Fragment slot="subtitle">{section.section}</Fragment>
+      {section.title}
+      <Fragment slot="description">{section.description}</Fragment>
+    </SectionTitle>
+
+    <ul class="space-y-2 text-lg">
+      {
+        tabs.map((tab, index) => (
+          <li>
+            <TabsTrigger
+              client:load
+              name="buyers-sellers"
+              index={index}
+              className="block data-[active]:font-bold"
+            >
+              {tab?.title}
+            </TabsTrigger>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  {
+    tabs.map((tab, index) => {
+      return (
+        <TabsContent client:load name="buyers-sellers" index={index}>
+          <ul class="space-y-12">
+            {tab?.items?.map((item) => (
+              <li>
+                <div class="font-bold">{item.title}</div>
+                <p>{item.description}</p>
+              </li>
+            ))}
+          </ul>
+        </TabsContent>
+      );
+    })
+  }
+</Section>
