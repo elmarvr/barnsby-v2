@@ -182,8 +182,8 @@ export type Service = {
   title?: LocaleStringArray;
   features?: Array<{
     icon?: Icon;
-    title?: string;
-    description?: string;
+    title?: LocaleStringArray;
+    description?: LocaleStringArray;
     _key: string;
   }>;
 };
@@ -194,18 +194,18 @@ export type BuyersSellers = {
   title?: LocaleStringArray;
   description?: string;
   buyers?: {
-    title?: string;
+    title?: LocaleStringArray;
     items?: Array<{
-      title?: string;
-      description?: string;
+      title?: LocaleStringArray;
+      description?: LocaleStringArray;
       _key: string;
     }>;
   };
   sellers?: {
-    title?: string;
+    title?: LocaleStringArray;
     items?: Array<{
-      title?: string;
-      description?: string;
+      title?: LocaleStringArray;
+      description?: LocaleStringArray;
       _key: string;
     }>;
   };
@@ -216,8 +216,8 @@ export type Method = {
   section?: LocaleStringArray;
   title?: LocaleStringArray;
   steps?: Array<{
-    title?: string;
-    description?: string;
+    title?: LocaleStringArray;
+    description?: LocaleStringArray;
     _key: string;
   }>;
 };
@@ -234,8 +234,8 @@ export type Coaching = {
 };
 
 export type ItemList = Array<{
-  title?: string;
-  description?: string;
+  title?: LocaleStringArray;
+  description?: LocaleStringArray;
   _key: string;
 }>;
 
@@ -263,18 +263,19 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity.queries.ts
 // Variable: methodQuery
-// Query: *[_type == "page"] {      "sections": sections[] {        _type,        "section": section[_key == $lang][0].value,        "title": title[_key == $lang][0].value,         "steps": coalesce(steps[] {        title,        description      }, []),          }[_type == "method"][0]    }[0].sections
+// Query: *[_type == "page"] {      "section": sections[] {        _type,        "section": section[_key == $lang][0].value,        "title": title[_key == $lang][0].value,         "description": description[_key == $lang][0].value,      "steps": coalesce(steps[] {        "title": title[_key == $lang][0].value,        "description": description[_key == $lang][0].value,      }, []),          }[_type == "method"][0]    }[0].section
 export type MethodQueryResult = {
   _type: "method";
   section: string | null;
   title: string | null;
+  description: null;
   steps: Array<{
     title: string | null;
     description: string | null;
   }> | Array<never>;
 } | null;
 // Variable: coachingQuery
-// Query: *[_type == "page"] {      "sections": sections[] {        _type,        "section": section[_key == $lang][0].value,        "title": title[_key == $lang][0].value,         "description": description[_key == $lang][0].value,      "items": coalesce(items[].title[_key == $lang][0].value, []),          }[_type == "coaching"][0]    }[0].sections
+// Query: *[_type == "page"] {      "section": sections[] {        _type,        "section": section[_key == $lang][0].value,        "title": title[_key == $lang][0].value,         "description": description[_key == $lang][0].value,      "items": coalesce(items[].title[_key == $lang][0].value, []),          }[_type == "coaching"][0]    }[0].section
 export type CoachingQueryResult = {
   _type: "coaching";
   section: string | null;
@@ -283,44 +284,41 @@ export type CoachingQueryResult = {
   items: Array<never> | Array<string | null>;
 } | null;
 // Variable: buyersSellersQuery
-// Query: *[_type == "page"] {      "sections": sections[] {        _type,        "section": section[_key == $lang][0].value,        "title": title[_key == $lang][0].value,         description,      buyers {        title,        items,      },      sellers {        title,        items,      }          }[_type == "buyers-sellers"][0]    }[0].sections
+// Query: *[_type == "page"] {      "section": sections[] {        _type,        "section": section[_key == $lang][0].value,        "title": title[_key == $lang][0].value,         "description": description[_key == $lang][0].value,      buyers {        "title": title[_key == $lang][0].value,        items[] {         "title": title[_key == $lang][0].value,          "description": description[_key == $lang][0].value,        }      },      sellers {        "title": title[_key == $lang][0].value,        items[] {          "title": title[_key == $lang][0].value,          "description": description[_key == $lang][0].value,        }      }          }[_type == "buyers-sellers"][0]    }[0].section
 export type BuyersSellersQueryResult = {
   _type: "buyers-sellers";
   section: string | null;
   title: string | null;
-  description: string | null;
+  description: null;
   buyers: {
     title: string | null;
     items: Array<{
-      title?: string;
-      description?: string;
-      _key: string;
+      title: string | null;
+      description: string | null;
     }> | null;
   } | null;
   sellers: {
     title: string | null;
     items: Array<{
-      title?: string;
-      description?: string;
-      _key: string;
+      title: string | null;
+      description: string | null;
     }> | null;
   } | null;
 } | null;
 // Variable: serviceQuery
-// Query: *[_type == "page"] {      "sections": sections[] {        _type,        "section": section[_key == $lang][0].value,        "title": title[_key == $lang][0].value,         features          }[_type == "service"][0]    }[0].sections
+// Query: *[_type == "page"] {      "section": sections[] {        _type,        "section": section[_key == $lang][0].value,        "title": title[_key == $lang][0].value,         features[] {        icon,        "title": title[_key == $lang][0].value,        "description": description[_key == $lang][0].value,      }          }[_type == "service"][0]    }[0].section
 export type ServiceQueryResult = {
   _type: "service";
   section: string | null;
   title: string | null;
   features: Array<{
-    icon?: Icon;
-    title?: string;
-    description?: string;
-    _key: string;
+    icon: Icon | null;
+    title: string | null;
+    description: string | null;
   }> | null;
 } | null;
 // Variable: infoQuery
-// Query: *[_type == "page"] {      "sections": sections[] {        _type,        "section": section[_key == $lang][0].value,        "title": title[_key == $lang][0].value,         description,      email,      phone,      address          }[_type == "info"][0]    }[0].sections
+// Query: *[_type == "page"] {      "section": sections[] {        _type,        "section": section[_key == $lang][0].value,        "title": title[_key == $lang][0].value,         description,      email,      phone,      address          }[_type == "info"][0]    }[0].section
 export type InfoQueryResult = {
   _type: "info";
   section: string | null;
@@ -351,7 +349,7 @@ export type ContactQueryResult = Array<{
   address: string | null;
 }>;
 // Variable: sectionsQuery
-// Query: *[_type == "page"] {    "sections": sections[] {      _type,      "title": title[_key == $lang][0].value,    }  }[0].sections
+// Query: *[_type == "page"] {    "sections": sections[] {      _type,      "title": section[_key == $lang][0].value,    }  }[0].sections
 export type SectionsQueryResult = Array<{
   _type: "buyers-sellers";
   title: string | null;
@@ -373,12 +371,12 @@ export type SectionsQueryResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"page\"] {\n      \"sections\": sections[] {\n        _type,\n        \"section\": section[_key == $lang][0].value,\n        \"title\": title[_key == $lang][0].value,\n         \"steps\": coalesce(steps[] {\n        title,\n        description\n      }, []),\n    \n      }[_type == \"method\"][0]\n    }[0].sections": MethodQueryResult;
-    "*[_type == \"page\"] {\n      \"sections\": sections[] {\n        _type,\n        \"section\": section[_key == $lang][0].value,\n        \"title\": title[_key == $lang][0].value,\n         \"description\": description[_key == $lang][0].value,\n      \"items\": coalesce(items[].title[_key == $lang][0].value, []),\n    \n      }[_type == \"coaching\"][0]\n    }[0].sections": CoachingQueryResult;
-    "*[_type == \"page\"] {\n      \"sections\": sections[] {\n        _type,\n        \"section\": section[_key == $lang][0].value,\n        \"title\": title[_key == $lang][0].value,\n         description,\n      buyers {\n        title,\n        items,\n      },\n      sellers {\n        title,\n        items,\n      }\n    \n      }[_type == \"buyers-sellers\"][0]\n    }[0].sections": BuyersSellersQueryResult;
-    "*[_type == \"page\"] {\n      \"sections\": sections[] {\n        _type,\n        \"section\": section[_key == $lang][0].value,\n        \"title\": title[_key == $lang][0].value,\n         features\n    \n      }[_type == \"service\"][0]\n    }[0].sections": ServiceQueryResult;
-    "*[_type == \"page\"] {\n      \"sections\": sections[] {\n        _type,\n        \"section\": section[_key == $lang][0].value,\n        \"title\": title[_key == $lang][0].value,\n         description,\n      email,\n      phone,\n      address\n    \n      }[_type == \"info\"][0]\n    }[0].sections": InfoQueryResult;
+    "*[_type == \"page\"] {\n      \"section\": sections[] {\n        _type,\n        \"section\": section[_key == $lang][0].value,\n        \"title\": title[_key == $lang][0].value,\n         \"description\": description[_key == $lang][0].value,\n      \"steps\": coalesce(steps[] {\n        \"title\": title[_key == $lang][0].value,\n        \"description\": description[_key == $lang][0].value,\n      }, []),\n    \n      }[_type == \"method\"][0]\n    }[0].section": MethodQueryResult;
+    "*[_type == \"page\"] {\n      \"section\": sections[] {\n        _type,\n        \"section\": section[_key == $lang][0].value,\n        \"title\": title[_key == $lang][0].value,\n         \"description\": description[_key == $lang][0].value,\n      \"items\": coalesce(items[].title[_key == $lang][0].value, []),\n    \n      }[_type == \"coaching\"][0]\n    }[0].section": CoachingQueryResult;
+    "*[_type == \"page\"] {\n      \"section\": sections[] {\n        _type,\n        \"section\": section[_key == $lang][0].value,\n        \"title\": title[_key == $lang][0].value,\n         \"description\": description[_key == $lang][0].value,\n      buyers {\n        \"title\": title[_key == $lang][0].value,\n        items[] {\n         \"title\": title[_key == $lang][0].value,\n          \"description\": description[_key == $lang][0].value,\n        }\n      },\n      sellers {\n        \"title\": title[_key == $lang][0].value,\n        items[] {\n          \"title\": title[_key == $lang][0].value,\n          \"description\": description[_key == $lang][0].value,\n        }\n      }\n    \n      }[_type == \"buyers-sellers\"][0]\n    }[0].section": BuyersSellersQueryResult;
+    "*[_type == \"page\"] {\n      \"section\": sections[] {\n        _type,\n        \"section\": section[_key == $lang][0].value,\n        \"title\": title[_key == $lang][0].value,\n         features[] {\n        icon,\n        \"title\": title[_key == $lang][0].value,\n        \"description\": description[_key == $lang][0].value,\n      }\n    \n      }[_type == \"service\"][0]\n    }[0].section": ServiceQueryResult;
+    "*[_type == \"page\"] {\n      \"section\": sections[] {\n        _type,\n        \"section\": section[_key == $lang][0].value,\n        \"title\": title[_key == $lang][0].value,\n         description,\n      email,\n      phone,\n      address\n    \n      }[_type == \"info\"][0]\n    }[0].section": InfoQueryResult;
     "\n  *[_type == \"contact\"] {\n    name,\n    email,\n    phone,\n    address,\n  }\n": ContactQueryResult;
-    "\n  *[_type == \"page\"] {\n    \"sections\": sections[] {\n      _type,\n      \"title\": title[_key == $lang][0].value,\n    }\n  }[0].sections\n": SectionsQueryResult;
+    "\n  *[_type == \"page\"] {\n    \"sections\": sections[] {\n      _type,\n      \"title\": section[_key == $lang][0].value,\n    }\n  }[0].sections\n": SectionsQueryResult;
   }
 }

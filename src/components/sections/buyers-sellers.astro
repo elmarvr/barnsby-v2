@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import { sanity } from "../../lib/sanity";
 import { buyersSellersQuery } from "../../sanity.queries";
 import Section from "../section";
@@ -14,7 +15,7 @@ const tabs = [section.sellers, section.buyers];
 <Section
   client:load
   name="buyers-sellers"
-  className="grid grid-cols-2 space-x-16"
+  className="grid grid-cols-2 gap-x-16"
 >
   <div>
     <SectionTitle>
@@ -31,9 +32,13 @@ const tabs = [section.sellers, section.buyers];
               client:load
               name="buyers-sellers"
               index={index}
-              className="block data-[active]:font-bold"
+              className="flex text-xl transition-all items-center gap-1 font-display data-[active]:text-primary"
             >
               {tab?.title}
+              <Icon
+                name="lucide:chevron-right"
+                class="size-6 relative top-px"
+              />
             </TabsTrigger>
           </li>
         ))
@@ -48,7 +53,7 @@ const tabs = [section.sellers, section.buyers];
           <ul class="space-y-12">
             {tab?.items?.map((item) => (
               <li>
-                <div class="font-bold">{item.title}</div>
+                <h4 class="font-bold">{item.title}</h4>
                 <p>{item.description}</p>
               </li>
             ))}

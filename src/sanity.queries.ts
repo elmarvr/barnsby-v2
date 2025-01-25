@@ -8,28 +8,29 @@ const defineSection = <TSection extends string, TQuery extends string>(
   section: TSection,
   query: TQuery
 ): `*[_type == "page"] {
-      "sections": sections[] {
+      "section": sections[] {
         _type,
         "section": section[_key == $lang][0].value,
         "title": title[_key == $lang][0].value,
         ${TQuery}
       }[_type == "${TSection}"][0]
-    }[0].sections` =>
+    }[0].section` =>
   `*[_type == "page"] {
-      "sections": sections[] {
+      "section": sections[] {
         _type,
         "section": section[_key == $lang][0].value,
         "title": title[_key == $lang][0].value,
         ${query}
       }[_type == "${section}"][0]
-    }[0].sections`;
+    }[0].section`;
 
 export const methodQuery = defineQuery(
   defineSection(
     "method",
-    ` "steps": coalesce(steps[] {
-        title,
-        description
+    ` "description": ${localeString("description")},
+      "steps": coalesce(steps[] {
+        "title": ${localeString("title")},
+        "description": ${localeString("description")},
       }, []),
     `
   )
@@ -47,14 +48,20 @@ export const coachingQuery = defineQuery(
 export const buyersSellersQuery = defineQuery(
   defineSection(
     "buyers-sellers",
-    ` description,
+    ` "description": ${localeString("description")},
       buyers {
-        title,
-        items,
+        "title": ${localeString("title")},
+        items[] {
+         "title": ${localeString("title")},
+          "description": ${localeString("description")},
+        }
       },
       sellers {
-        title,
-        items,
+        "title": ${localeString("title")},
+        items[] {
+          "title": ${localeString("title")},
+          "description": ${localeString("description")},
+        }
       }
     `
   )
@@ -63,7 +70,11 @@ export const buyersSellersQuery = defineQuery(
 export const serviceQuery = defineQuery(
   defineSection(
     "service",
-    ` features
+    ` features[] {
+        icon,
+        "title": ${localeString("title")},
+        "description": ${localeString("description")},
+      }
     `
   )
 );

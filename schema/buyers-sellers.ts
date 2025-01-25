@@ -19,16 +19,15 @@ export const buyersSellers = defineType({
     }),
     defineField({
       name: "description",
-      type: "string",
+      type: "locale-string-array",
     }),
     defineField({
       name: "buyers",
       type: "object",
-
       fields: [
         {
           name: "title",
-          type: "string",
+          type: "locale-string-array",
         },
         {
           name: "items",
@@ -42,7 +41,7 @@ export const buyersSellers = defineType({
       fields: [
         {
           name: "title",
-          type: "string",
+          type: "locale-string-array",
         },
         {
           name: "items",

@@ -8,9 +8,9 @@ export default {
         body: ["Source Sans Pro", "sans-serif"],
       },
       colors: {
-        background: "var(--color-background)",
-        foreground: "var(--color-foreground)",
-        primary: "var(--color-primary)",
+        background: "hsl(var(--color-background))",
+        foreground: "hsl(var(--color-foreground))",
+        primary: "hsl(var(--color-primary))",
       },
     },
   },

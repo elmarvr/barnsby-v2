@@ -5,6 +5,8 @@ import "../index.css";
 import { SectionLink } from "../components/section";
 import { sanity } from "../lib/sanity";
 import { sectionsQuery } from "../sanity.queries";
+import LocaleSelect from "../components/locale-select";
+import { ScrollRestoration } from "../components/scroll-restoration";
 
 const locale = Astro.currentLocale;
 const sections = (await sanity.fetch(sectionsQuery, { lang: locale }))!;
@@ -19,16 +21,28 @@ const sections = (await sanity.fetch(sectionsQuery, { lang: locale }))!;
     <meta name="generator" content={Astro.generator} />
     <title>Astro Basics</title>
   </head>
-  <body>
-    <div class="top-0 sticky flex gap-x-4">
-      {
-        sections.map((section) => (
-          <SectionLink client:load name={section._type}>
-            {section.title}
-          </SectionLink>
-        ))
-      }
+  <body hidden>
+    <div class="top-0 sticky bg-background z-10">
+      <div class="flex justify-between mx-auto container py-4">
+        <div></div>
+        <nav class="flex gap-x-4">
+          {
+            sections.map((section) => (
+              <SectionLink client:load name={section._type}>
+                {section.title}
+              </SectionLink>
+            ))
+          }
+          <LocaleSelect
+            client:load
+            locales={["nl", "en"]}
+            currentLocale={locale ?? "nl"}
+            className="ml-4"
+          />
+        </nav>
+      </div>
     </div>
     <slot />
+    <ScrollRestoration client:load />
   </body>
 </html>

@@ -23,6 +23,11 @@ export const service = defineType({
       of: [
         {
           type: "object",
+          preview: {
+            select: {
+              title: "title.0.value",
+            },
+          },
           fields: [
             {
               name: "icon",
@@ -30,11 +35,11 @@ export const service = defineType({
             },
             {
               name: "title",
-              type: "string",
+              type: "locale-string-array",
             },
             {
               name: "description",
-              type: "string",
+              type: "locale-string-array",
             },
           ],
         },

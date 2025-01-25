@@ -985,14 +985,16 @@
                 "title": {
                   "type": "objectAttribute",
                   "value": {
-                    "type": "string"
+                    "type": "inline",
+                    "name": "locale-string-array"
                   },
                   "optional": true
                 },
                 "description": {
                   "type": "objectAttribute",
                   "value": {
-                    "type": "string"
+                    "type": "inline",
+                    "name": "locale-string-array"
                   },
                   "optional": true
                 }
@@ -1059,7 +1061,8 @@
               "title": {
                 "type": "objectAttribute",
                 "value": {
-                  "type": "string"
+                  "type": "inline",
+                  "name": "locale-string-array"
                 },
                 "optional": true
               },
@@ -1073,14 +1076,16 @@
                       "title": {
                         "type": "objectAttribute",
                         "value": {
-                          "type": "string"
+                          "type": "inline",
+                          "name": "locale-string-array"
                         },
                         "optional": true
                       },
                       "description": {
                         "type": "objectAttribute",
                         "value": {
-                          "type": "string"
+                          "type": "inline",
+                          "name": "locale-string-array"
                         },
                         "optional": true
                       }
@@ -1112,7 +1117,8 @@
               "title": {
                 "type": "objectAttribute",
                 "value": {
-                  "type": "string"
+                  "type": "inline",
+                  "name": "locale-string-array"
                 },
                 "optional": true
               },
@@ -1126,14 +1132,16 @@
                       "title": {
                         "type": "objectAttribute",
                         "value": {
-                          "type": "string"
+                          "type": "inline",
+                          "name": "locale-string-array"
                         },
                         "optional": true
                       },
                       "description": {
                         "type": "objectAttribute",
                         "value": {
-                          "type": "string"
+                          "type": "inline",
+                          "name": "locale-string-array"
                         },
                         "optional": true
                       }
@@ -1199,14 +1207,16 @@
                 "title": {
                   "type": "objectAttribute",
                   "value": {
-                    "type": "string"
+                    "type": "inline",
+                    "name": "locale-string-array"
                   },
                   "optional": true
                 },
                 "description": {
                   "type": "objectAttribute",
                   "value": {
-                    "type": "string"
+                    "type": "inline",
+                    "name": "locale-string-array"
                   },
                   "optional": true
                 }
@@ -1311,14 +1321,16 @@
           "title": {
             "type": "objectAttribute",
             "value": {
-              "type": "string"
+              "type": "inline",
+              "name": "locale-string-array"
             },
             "optional": true
           },
           "description": {
             "type": "objectAttribute",
             "value": {
-              "type": "string"
+              "type": "inline",
+              "name": "locale-string-array"
             },
             "optional": true
           }

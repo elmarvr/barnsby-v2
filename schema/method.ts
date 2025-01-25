@@ -3,7 +3,7 @@ import { defineField, defineType } from "sanity";
 export const method = defineType({
   name: "method",
   type: "object",
-  title: "Method",
+  title: "Process",
   preview: {
     select: {
       title: "section.0.value",

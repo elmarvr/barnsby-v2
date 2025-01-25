@@ -59,7 +59,8 @@ export function SectionLink({
   children: React.ReactNode;
   className?: string;
 }) {
-  const { isActive } = useSection(name);
+  const activeSection = useSection();
+  const isActive = activeSection === name;
 
   return (
     <a
@@ -72,12 +73,8 @@ export function SectionLink({
   );
 }
 
-export function useSection(name: string) {
-  const activeSection = useStore($activeSection);
-
-  return {
-    isActive: activeSection === name,
-  };
+export function useSection() {
+  return useStore($activeSection);
 }
 
 const $activeSection = atom<string | null>(null);

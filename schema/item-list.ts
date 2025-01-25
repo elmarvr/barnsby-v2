@@ -6,14 +6,20 @@ export const itemList = defineType({
   of: [
     {
       type: "object",
+      preview: {
+        select: {
+          title: "title.0.value",
+        },
+      },
+
       fields: [
         {
           name: "title",
-          type: "string",
+          type: "locale-string-array",
         },
         {
           name: "description",
-          type: "string",
+          type: "locale-string-array",
         },
       ],
     },
